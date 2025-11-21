@@ -1,21 +1,21 @@
 const express = require('express');
-const {
-  getTransactions,
-  addTransaction,
-  updateTransaction,
-  deleteTransaction
-} = require('../controllers/transactionController');
-const { protect } = require('../middleware/authMiddleware');
+const { getTransactionn } = require('../controllers/transactionController');
 
 const router = express.Router();
 
-// All routes are private
-router.route('/')
-  .get(protect, getTransactions)
-  .post(protect, addTransaction);
 
-router.route('/:id')
-  .put(protect, updateTransaction)
-  .delete(protect, deleteTransaction);
+//get req
+router.get('/', getTransaction)
+
+router.get('/:id', getSingleTransaction)
+
+//post req
+router.post('/', createTransaction)
+
+//delete req
+router.delete('/:id', deleteTransaction)
+
+//update req
+router.patch("/:id", updateTransaction)
 
 module.exports = router;

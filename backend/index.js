@@ -15,9 +15,15 @@ connectDB();
 // Initialize Express app
 const app = express();
 
+app.use(cors());         // enable CORS
+
 // Middleware
 app.use(express.json()); // parse JSON request bodies
-app.use(cors());         // enable CORS
+app.use((req,res,next)=>{
+  console.log(req.path, req.method)
+  next()
+})
+
 
 // Routes
 app.use('/api/auth', authRoutes);

@@ -1,37 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const { default: _default } = require('validator')
 
-const transactionSchema = mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    type: {
-      type: String,
-      enum: ['income', 'expense'],
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
+const Schema = mongoose.Schema
+
+const transactionSchema = new Schema({
+    title:{
+        type: String,
+        required: true
     },
     amount: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true
+    },
+    type:{
+        type: String,
+        required: true,
+        enum: ["income", "expense"]
+    },
+    category:{
+        type: String,
+        required: true,
+        enum: ["food", "Rent", "Salary", "Transport", "Shoping", "Other"],
+        default: "Other"
+    },
+    description: {
+        type: String,
+        required: false,
     },
     date: {
-      type: Date,
-      default: Date.now,
-    },
-    note: {
-      type: String,
-      default: '',
-    },
-  },
-  {
-    timestamps: true, // Automatically adds createdAt and updatedAt
-  }
-);
+        type: Date,
+        default: Date.now
+    }
+}, {timestamps: true})
 
-module.exports = mongoose.model('Transaction', transactionSchema);
+module.exports = mongoose.model("Transaction", transactionSchema)
