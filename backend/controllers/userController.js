@@ -1,8 +1,9 @@
 const createToken = require("../middleware/createToken")
 const User = require("../models/userModel")
-const jwt = require("jsonwebtoken")
+require('dotenv').config();
 
-console.log ('Secret: ', process.env.SECRET)
+// Log SECRET for debugging (should be set from .env)
+console.log('Secret: ', process.env.SECRET);
 
 //login user
 const loginUser = async (req, res) =>{

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const validator = require("validator")
-const createToken = require("../middleware/createToken")
 
 const Schema = mongoose.Schema
 
@@ -59,8 +58,7 @@ userSchema.statics.login = async function (email,password) {
     if(!match){
         throw Error("Incorrect password")
     }
-    const token = createToken(user._id)
-    return {user, token}
+    return user
 }
 
 module.exports = mongoose.model('User', userSchema)
