@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* =======================================================
+   CLASSIC BLUE & WHITE THEME (Light Only)
+   ======================================================= */
+@theme {
+  :root {
+    --color-bg: #ffffff;
+    --color-surface: #f8fafc;
+    --color-white: #ffffff;
+
+    --color-blue-light: #e8f1ff;
+    --color-blue: #2563eb;
+    --color-blue-dark: #1e40af;
+
+    --color-gray-light: #e2e8f0;
+    --color-gray: #94a3b8;
+    --color-gray-dark: #475569;
+
+    --color-text: #0f172a;
+    --color-border: #e5e7eb;
+
+    --font-sans: "Inter", sans-serif;
+    --font-serif: "Merriweather", serif;
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.06);
+
+    --spacing-sm: 0.4rem;
+    --spacing-lg: 1.4rem;
+  }
+}
+
+/* Background + typography */
+@utility .app-bg {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Container */
+@utility .container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1536px) { max-width: 1400px; }
+}
+
+/* Card */
+@utility .card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* Title */
+@utility .title-main {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-blue-dark);
+}
+
+/* Buttons */
+@utility .btn-primary {
+  background: var(--color-blue);
+  color: var(--color-white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+
+  &:hover {
+    background: var(--color-blue-dark);
+  }
+}
+
+@utility .btn-secondary {
+  background: var(--color-surface);
+  border: 1px solid var(--color-blue);
+  color: var(--color-blue-dark);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+
+  &:hover {
+    background: var(--color-blue-light);
+  }
+}
