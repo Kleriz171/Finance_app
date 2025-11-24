@@ -1,96 +1,117 @@
 @import "tailwindcss";
 
-/* =======================================================
-   CLASSIC BLUE & WHITE THEME (Light Only)
-   ======================================================= */
 @theme {
-  :root {
-    --color-bg: #ffffff;
-    --color-surface: #f8fafc;
-    --color-white: #ffffff;
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 
-    --color-blue-light: #e8f1ff;
-    --color-blue: #2563eb;
-    --color-blue-dark: #1e40af;
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
 
-    --color-gray-light: #e2e8f0;
-    --color-gray: #94a3b8;
-    --color-gray-dark: #475569;
+  --color-card: hsl(var(--card));
 
-    --color-text: #0f172a;
-    --color-border: #e5e7eb;
+  /* Added recommended shadcn-compatible variables */
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
-    --font-sans: "Inter", sans-serif;
-    --font-serif: "Merriweather", serif;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.7s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
 
-    --radius-md: 8px;
-    --radius-lg: 12px;
-
-    --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.06);
-
-    --spacing-sm: 0.4rem;
-    --spacing-lg: 1.4rem;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 }
 
-/* Background + typography */
-@utility .app-bg {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 63% 12%;
+
+    --card: 220 33% 98%;
+
+    --primary: 217 83% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --border: 210 16% 85%;
+
+    --input: 210 16% 85%;
+    --ring: 217 83% 51%;
+    --muted: 220 33% 92%;
+    --muted-foreground: 220 15% 40%;
+  }
+
+  .dark {
+    --background: 220 30% 5%;
+    --foreground: 0 0% 100%;
+
+    --card: 220 25% 12%;
+
+    --primary: 217 86% 60%;
+    --primary-foreground: 220 30% 5%;
+
+    --border: 220 15% 20%;
+
+    --input: 220 15% 20%;
+    --ring: 217 86% 60%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 10% 70%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-/* Container */
-@utility .container {
+@utility container {
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 2rem;
 
   @media (width >= 640px) { max-width: 640px; }
   @media (width >= 768px) { max-width: 768px; }
   @media (width >= 1024px) { max-width: 1024px; }
   @media (width >= 1280px) { max-width: 1280px; }
-  @media (width >= 1536px) { max-width: 1400px; }
+  @media (width >= 1400px) { max-width: 1400px; }
 }
 
-/* Card */
-@utility .card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
+@utility card-hover {
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
 }
 
-/* Title */
-@utility .title-main {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--color-blue-dark);
+@utility gradient-border {
+  @apply relative rounded-md;
+  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
+  background-clip: padding-box;
+  border: 1px solid transparent;
 }
 
-/* Buttons */
-@utility .btn-primary {
-  background: var(--color-blue);
-  color: var(--color-white);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-
-  &:hover {
-    background: var(--color-blue-dark);
-  }
-}
-
-@utility .btn-secondary {
-  background: var(--color-surface);
-  border: 1px solid var(--color-blue);
-  color: var(--color-blue-dark);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-
-  &:hover {
-    background: var(--color-blue-light);
-  }
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
 }
